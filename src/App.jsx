@@ -83,7 +83,7 @@ const App = () => {
         <button type='submit'>login</button>
       </form>
   )
-
+    //exercise 5.2
   const logout = () =>{
     return (
       <button onClick={handleLogout}>
