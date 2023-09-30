@@ -3,11 +3,16 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification  from './components/Notification'
+import UserSubmitForm from './components/UserSubmitForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
+  const [likes,setLikes] = useState('')
   const [user,setUser] = useState(null)
   //effects
     useEffect(() => {
@@ -40,6 +45,7 @@ const App = () => {
       setUsername("");
       setPassword("");
       console.log(user.name)
+      console.log(user)
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
@@ -51,9 +57,44 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogAppUser')
     window.location.reload()
   }
+  //Exercise 5.3
+  const handleUserFormSubmission = async (event) =>{
+    event.preventDefault()
+    const blogObject = {
+      title: title ,
+      author: author,
+      url: url,
+      likes:likes,
+      user: user.id,
+    }
+    console.log(blogObject)
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+    setLikes('')
+    
+  }
+
+  const handleTitle = (event) =>{
+    console.log(event.target.value);
+    setTitle(event.target.value)
+  }
+  const handleAuthor = (event) =>{
+    console.log(event.target.value);
+    setAuthor(event.target.value)
+  }
+  const handleUrl = (event) =>{
+    console.log(event.target.value);
+    setUrl(event.target.value)
+  }
+  const handleLikes = (event) =>{
+    console.log(event.target.value);
+    setLikes(event.target.value)
+  }
   const blogListDiv = () => (
     <div>
-      <h2>blogs</h2>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
@@ -96,11 +137,17 @@ const App = () => {
     <>
     <Notification message={errorMessage}/>
     {user===null ? loginForm() : (
-      <div>
+      <>
+        <div>
+        <h2>blogs</h2>
         <p>{user.name} has logged in</p>
         {logout()}
+        <UserSubmitForm title={title} author={author} url={url} likes = {likes} handleUserFormSubmission = {handleUserFormSubmission} handleTitle = {handleTitle} handleAuthor = {handleAuthor} handleUrl = {handleUrl} handleLikes = {handleLikes}/>
         {blogListDiv()}
-      </div>
+        </div>
+
+      </>
+      
     )}
     </>
     
