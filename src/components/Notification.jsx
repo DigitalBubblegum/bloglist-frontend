@@ -1,14 +1,24 @@
-const Notification = ({ message }) => {
-  if (message === null) {
-    return null
-  }
-
-  if(message === 'Wrong credentials'){
+const Notification = ({ errorMessage, notificationMessage  }) => {
+//exercise 5.4
+  if(errorMessage === 'Wrong credentials'){
     return (
     <div className='error'>
-      {message}
+      {errorMessage}
+    </div>
+  )
+  } else if(notificationMessage !== null){
+    return (
+    <div className='notification'>
+      {notificationMessage}
     </div>
   )
   }
+  else{
+    return null
+  }
+
+
+
+
 }
 export default Notification

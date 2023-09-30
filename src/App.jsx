@@ -7,6 +7,7 @@ import UserSubmitForm from './components/UserSubmitForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationMessage, setNotificationMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [title, setTitle] = useState('')
@@ -68,13 +69,17 @@ const App = () => {
       user: user.id,
     }
     console.log(blogObject)
+    setNotificationMessage(`${blogObject.title} by author ${blogObject.author} added to the blog`)
+    setTimeout(() => {
+        setNotificationMessage(null)
+      }, 5000)
     const returnedBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(returnedBlog))
     setTitle('')
     setAuthor('')
     setUrl('')
     setLikes('')
-    
+
   }
 
   const handleTitle = (event) =>{
@@ -135,7 +140,7 @@ const App = () => {
 
   return (
     <>
-    <Notification message={errorMessage}/>
+    <Notification errorMessage={errorMessage} notificationMessage = {notificationMessage} />
     {user===null ? loginForm() : (
       <>
         <div>
