@@ -3,10 +3,12 @@ const Notification = ({ message }) => {
     return null
   }
 
-  return (
+  if(message === 'Wrong credentials'){
+    return (
     <div className='error'>
       {message}
     </div>
   )
+  }
 }
 export default Notification
