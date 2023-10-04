@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification  from './components/Notification'
 import UserSubmitForm from './components/UserSubmitForm'
+import Togglable from './components/Togglable'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
@@ -147,7 +148,10 @@ const App = () => {
         <h2>blogs</h2>
         <p>{user.name} has logged in</p>
         {logout()}
-        <UserSubmitForm title={title} author={author} url={url} likes = {likes} handleUserFormSubmission = {handleUserFormSubmission} handleTitle = {handleTitle} handleAuthor = {handleAuthor} handleUrl = {handleUrl} handleLikes = {handleLikes}/>
+        <Togglable buttonLabel = 'Add blog'>
+          <UserSubmitForm title={title} author={author} url={url} likes = {likes} handleUserFormSubmission = {handleUserFormSubmission} handleTitle = {handleTitle} handleAuthor = {handleAuthor} handleUrl = {handleUrl} handleLikes = {handleLikes}/>
+        </Togglable>
+        
         {blogListDiv()}
         </div>
 
