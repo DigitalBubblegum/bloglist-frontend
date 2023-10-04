@@ -1,4 +1,43 @@
-const UserSubmitForm = ({title,author,url,likes, handleUserFormSubmission,handleTitle ,handleAuthor ,handleUrl ,handleLikes }) => {
+import { useState } from "react";
+// const UserSubmitForm = ({handleUserFormSubmission, title,author,url,likes,handleTitle,handleAuthor,handleUrl,handleLikes}) => {
+    const UserSubmitForm = ({createBlog, userId}) => {
+    //states
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
+    const [likes,setLikes] = useState('')
+//handlers
+const handleTitle = (event) =>{
+    console.log(event.target.value);
+    setTitle(event.target.value)
+  }
+  const handleAuthor = (event) =>{
+    console.log(event.target.value);
+    setAuthor(event.target.value)
+  }
+  const handleUrl = (event) =>{
+    console.log(event.target.value);
+    setUrl(event.target.value)
+  }
+  const handleLikes = (event) =>{
+    console.log(event.target.value);
+    setLikes(event.target.value)
+  }
+  const handleUserFormSubmission = (event) =>{
+    event.preventDefault()
+    createBlog({
+      title: title ,
+      author: author,
+      url: url,
+      likes:likes,
+      user: userId,
+    })
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+    setLikes('')
+
+  }
     return (
         <div>
             <form onSubmit={handleUserFormSubmission}>
