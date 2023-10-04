@@ -156,9 +156,7 @@ const App = () => {
         
         {blogListDiv()}
         </div>
-
       </>
-      
     )}
     </>
     
