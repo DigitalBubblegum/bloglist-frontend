@@ -38,8 +38,11 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
+      console.log(user.name)
       console.log('i got the username')
       window.localStorage.setItem('loggedBlogAppUser',JSON.stringify(user))
+      console.log('i got the name')
+      window.localStorage.setItem('loggedBlogAppName',JSON.stringify(user.name))
       //setting user token here
       blogService.setToken(user.token)
       console.log('i set the username');
@@ -56,7 +59,7 @@ const App = () => {
     }
   }
   const handleLogout = () =>{
-    window.localStorage.removeItem('loggedBlogAppUser')
+    window.localStorage.clear()
     window.location.reload()
   }
   //Exercise 5.3

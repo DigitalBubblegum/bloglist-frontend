@@ -25,6 +25,7 @@ const handleTitle = (event) =>{
   }
   const handleUserFormSubmission = (event) =>{
     event.preventDefault()
+    console.log(userId)
     createBlog({
       title: title ,
       author: author,
