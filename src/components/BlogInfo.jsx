@@ -1,3 +1,4 @@
+
 const BlogInfo =({url,likes,addedBy}) =>{
     return (
     <div>

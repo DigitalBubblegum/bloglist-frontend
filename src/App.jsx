@@ -11,10 +11,6 @@ const App = () => {
   const [notificationMessage, setNotificationMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  // const [title, setTitle] = useState('')
-  // const [author, setAuthor] = useState('')
-  // const [url, setUrl] = useState('')
-  // const [likes,setLikes] = useState('')
   const [user,setUser] = useState(null)
   //effects
     useEffect(() => {
@@ -42,7 +38,6 @@ const App = () => {
       console.log('i got the username')
       window.localStorage.setItem('loggedBlogAppUser',JSON.stringify(user))
       console.log('i got the name')
-      window.localStorage.setItem('loggedBlogAppName',JSON.stringify(user.name))
       //setting user token here
       blogService.setToken(user.token)
       console.log('i set the username');
@@ -64,14 +59,6 @@ const App = () => {
   }
   //Exercise 5.3
   const handleUserFormSubmission = async(blogObject) =>{
-    // event.preventDefault()
-    // const blogObject = {
-    //   title: title , 
-    //   author: author,
-    //   url: url,
-    //   likes:likes,
-    //   user: user.id,
-    // }
     console.log('form submission')
     console.log(blogObject)
     setNotificationMessage(`${blogObject.title} by author ${blogObject.author} added to the blog`)
@@ -79,30 +66,10 @@ const App = () => {
         setNotificationMessage(null)
       }, 5000)
     const returnedBlog = await blogService.create(blogObject)
+    console.log(returnedBlog)
+    returnedBlog.user = user;
     setBlogs(blogs.concat(returnedBlog))
-    // setTitle('')
-    // setAuthor('')
-    // setUrl('')
-    // setLikes('')
-
   }
-
-  // const handleTitle = (event) =>{
-  //   console.log(event.target.value);
-  //   setTitle(event.target.value)
-  // }
-  // const handleAuthor = (event) =>{
-  //   console.log(event.target.value);
-  //   setAuthor(event.target.value)
-  // }
-  // const handleUrl = (event) =>{
-  //   console.log(event.target.value);
-  //   setUrl(event.target.value)
-  // }
-  // const handleLikes = (event) =>{
-  //   console.log(event.target.value);
-  //   setLikes(event.target.value)
-  // }
   const blogListDiv = () => (
     <div>
       {blogs.map(blog =>
@@ -153,7 +120,6 @@ const App = () => {
         <p>{user.name} has logged in</p>
         {logout()}
         <Togglable buttonLabel = 'Add blog'>
-          {/* <UserSubmitForm handleUserFormSubmission = {handleUserFormSubmission}/> */}
           <UserSubmitForm createBlog = {handleUserFormSubmission} userId = {user.id}/>
         </Togglable>
         
