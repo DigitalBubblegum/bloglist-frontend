@@ -14,8 +14,12 @@ const App = () => {
   const [user,setUser] = useState(null)
   //effects
     useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+    blogService.getAll().then(blogs =>{
+      let blogsorted = blogs.slice().sort((a, b) => a.likes - b.likes)
+      console.log(blogsorted)
+      setBlogs( blogsorted )
+    }
+      
     )  
   }, [])
 
@@ -75,6 +79,7 @@ const App = () => {
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
+      
     </div>
   )
   //exercise 5.1 
