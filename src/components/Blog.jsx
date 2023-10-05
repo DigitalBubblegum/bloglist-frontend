@@ -8,11 +8,12 @@ const Blog = ({ blog }) => {
     borderWidth: 1,
     marginBottom: 5
   }
+
   return(
      <div style={blogStyle}>
     {blog.title} <br/>{blog.author}
     <Togglable buttonLabel = 'view'>
-    <BlogInfo url = {blog.url} likes = {blog.likes} addedBy = {blog.user.name}/>
+    <BlogInfo blog= {blog} addedBy = {blog.user.name}/>
     </Togglable>
   </div>  
   )
