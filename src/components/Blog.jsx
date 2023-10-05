@@ -8,16 +8,13 @@ const Blog = ({ blog }) => {
     borderWidth: 1,
     marginBottom: 5
   }
-
   return(
-     <div style={blogStyle}>
-    {blog.title} <br/>{blog.author} <br/> {blog.user.name} <br/> {blog.user.id}
-    <Togglable buttonLabel = 'view'>
-    <BlogInfo blog= {blog} addedBy = {blog.user.name} id = {blog.user.id}/>
-    </Togglable>
-  </div>  
+    <div style={blogStyle}>
+      {blog.title} <br/>{blog.author} <br/> {blog.user.name} <br/> {blog.user.id}
+      <Togglable buttonLabel = 'view'>
+        <BlogInfo blog= {blog} addedBy = {blog.user.name} id = {blog.user.id}/>
+      </Togglable>
+    </div>
   )
- 
-
 }
 export default Blog

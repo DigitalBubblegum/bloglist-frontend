@@ -13,16 +13,14 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user,setUser] = useState(null)
   //effects
-    useEffect(() => {
-    blogService.getAll().then(blogs =>{
+  useEffect(() => {
+    blogService.getAll().then(blogs => {
       let blogsorted = blogs.slice().sort((a, b) => a.likes - b.likes)
       console.log(blogsorted)
       setBlogs( blogsorted )
     }
-      
-    )  
-  }, [])
-
+    )
+  },[])
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
     if (loggedUserJSON) {
@@ -31,7 +29,7 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-  //helper functions 
+  //helper functions
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -44,10 +42,10 @@ const App = () => {
       console.log('i got the name')
       //setting user token here
       blogService.setToken(user.token)
-      console.log('i set the username');
-      setUser(user);
-      setUsername("");
-      setPassword("");
+      console.log('i set the username')
+      setUser(user)
+      setUsername('')
+      setPassword('')
       console.log(user.name)
       console.log(user)
     } catch (exception) {
@@ -57,21 +55,21 @@ const App = () => {
       }, 5000)
     }
   }
-  const handleLogout = () =>{
+  const handleLogout = () => {
     window.localStorage.clear()
     window.location.reload()
   }
   //Exercise 5.3
-  const handleUserFormSubmission = async(blogObject) =>{
+  const handleUserFormSubmission = async(blogObject) => {
     console.log('form submission')
     console.log(blogObject)
     setNotificationMessage(`${blogObject.title} by author ${blogObject.author} added to the blog`)
     setTimeout(() => {
-        setNotificationMessage(null)
-      }, 5000)
+      setNotificationMessage(null)
+    }, 5000)
     const returnedBlog = await blogService.create(blogObject)
     console.log(returnedBlog)
-    returnedBlog.user = user;
+    returnedBlog.user = user
     setBlogs(blogs.concat(returnedBlog))
   }
   const blogListDiv = () => (
@@ -79,35 +77,34 @@ const App = () => {
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
-      
     </div>
   )
-  //exercise 5.1 
-  const loginForm = () =>(
+  //exercise 5.1
+  const loginForm = () => (
     <form onSubmit={handleLogin}>
-        <div>
+      <div>
           username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
+        <input
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
           password
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type='submit'>login</button>
-      </form>
+        <input
+          type="password"
+          value={password}
+          name="password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type='submit'>login</button>
+    </form>
   )
-    //exercise 5.2
-  const logout = () =>{
+  //exercise 5.2
+  const logout = () => {
     return (
       <button onClick={handleLogout}>
         LogOut
@@ -117,24 +114,21 @@ const App = () => {
 
   return (
     <>
-    <Notification errorMessage={errorMessage} notificationMessage = {notificationMessage} />
-    {user===null ? loginForm() : (
-      <>
-        <div>
-        <h2>blogs</h2>
-        <p>{user.name} has logged in</p>
-        {logout()}
-        <Togglable buttonLabel = 'Add blog'>
-          <UserSubmitForm createBlog = {handleUserFormSubmission} userId = {user.id}/>
-        </Togglable>
-        
-        {blogListDiv()}
-        </div>
-      </>
-    )}
+      <Notification errorMessage={errorMessage} notificationMessage = {notificationMessage} />
+      {user===null ? loginForm() : (
+        <>
+          <div>
+            <h2>blogs</h2>
+            <p>{user.name} has logged in</p>
+            {logout()}
+            <Togglable buttonLabel = 'Add blog'>
+              <UserSubmitForm createBlog = {handleUserFormSubmission} userId = {user.id}/>
+            </Togglable>
+            {blogListDiv()}
+          </div>
+        </>
+      )}
     </>
-    
   )
 }
-
 export default App
