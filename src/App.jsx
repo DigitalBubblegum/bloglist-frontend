@@ -12,6 +12,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user,setUser] = useState(null)
+  let useID = null
   //effects
   useEffect(() => {
     blogService.getAll().then(blogs => {
@@ -39,6 +40,7 @@ const App = () => {
       console.log(user.name)
       console.log('i got the username')
       window.localStorage.setItem('loggedBlogAppUser',JSON.stringify(user))
+      useID = user.id
       console.log('i got the name')
       //setting user token here
       blogService.setToken(user.token)
@@ -75,7 +77,7 @@ const App = () => {
   const blogListDiv = () => (
     <div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} useId = {useID} />
       )}
     </div>
   )

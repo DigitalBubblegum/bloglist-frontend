@@ -1,6 +1,6 @@
 import blogService from '../services/blogs'
 import { useState } from 'react'
-const BlogInfo =({ blog,addedBy,id }) => {
+const BlogInfo =({ blog,addedBy,id,useID }) => {
   const [likes, setLikes] = useState(blog.likes)
   const likesUpdater = async() => {
     blog.likes += 1
@@ -22,7 +22,7 @@ const BlogInfo =({ blog,addedBy,id }) => {
       window.alert('invalid input try again')
     }
   }
-  if(id===JSON.parse(window.localStorage.getItem('loggedBlogAppUser')).id){
+  if(id===useID){
     return (
       <div>
         {blog.url}<br/>
