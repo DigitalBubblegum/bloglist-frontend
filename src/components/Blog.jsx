@@ -11,8 +11,8 @@ const Blog = ({ blog, useID }) => {
   return(
     <div style={blogStyle} className = 'basicBlogView'>
       {/* {blog.title} <br/>{blog.author} <br/> {blog.user.name} <br/> {blog.user.id} */}
-      {blog.title} <br/>{blog.author}
-      <Togglable buttonLabel = 'view'>
+      {blog.title} <br/>{blog.author}<br/>
+      <Togglable buttonLabel = 'view' className = 'togglableContent'>
         <BlogInfo blog= {blog} addedBy = {blog.user.name} id = {blog.user.id} useId = {useID}/>
       </Togglable>
     </div>

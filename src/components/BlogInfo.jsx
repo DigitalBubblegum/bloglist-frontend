@@ -25,6 +25,7 @@ const BlogInfo =({ blog,addedBy,id,useID }) => {
   if(id===useID){
     return (
       <div>
+        <br/>
         {blog.url}<br/>
         {likes} <button onClick={likesUpdater}>like</button><br/>
         {addedBy}<br/>
@@ -34,6 +35,7 @@ const BlogInfo =({ blog,addedBy,id,useID }) => {
   } else {
     return (
       <div>
+        <br/>
         {blog.url}<br/>
         {likes} <button onClick={likesUpdater}>like</button><br/>
         {addedBy}<br/>
