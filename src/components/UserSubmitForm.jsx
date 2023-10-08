@@ -23,6 +23,7 @@ const UserSubmitForm = ({ createBlog, userId }) => {
     setLikes(event.target.value)
   }
   const handleUserFormSubmission = (event) => {
+    console.log('clicked submit')
     event.preventDefault()
     console.log(userId)
     createBlog({
@@ -40,20 +41,20 @@ const UserSubmitForm = ({ createBlog, userId }) => {
   }
   return (
     <div>
-      <form onSubmit={handleUserFormSubmission}>
+      <form onSubmit={handleUserFormSubmission} className='userForm'>
         <label>Title</label>
-        <input type = "text" value = {title} name="Title" onChange={handleTitle}></input>
+        <input type = "text" value = {title} name="Title" onChange={handleTitle} placeholder='enter title here'></input>
         <br/>
         <label>Author</label>
-        <input type = "text" value = {author} name="Author" onChange={handleAuthor}></input>
+        <input type = "text" value = {author} name="Author" onChange={handleAuthor} placeholder='enter author here'></input>
         <br/>
         <label>url</label>
-        <input type = "text" value = {url} name="URL"onChange={handleUrl}></input>
+        <input type = "text" value = {url} name="URL"onChange={handleUrl} placeholder='enter url here'></input>
         <br/>
         <label>likes</label>
-        <input type = "text" value ={likes} name="Likes" onChange={handleLikes}></input>
+        <input type = "text" value ={likes} name="Likes" onChange={handleLikes} placeholder='enter likes here'></input>
         <br/>
-        <button>Save</button>
+        <button type="submit">save</button>
       </form>
     </div>
   )
