@@ -12,12 +12,12 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user,setUser] = useState(null)
-  let useID = null
+  // let useID = null
   //effects
   useEffect(() => {
     blogService.getAll().then(blogs => {
       let blogsorted = blogs.slice().sort((a, b) => a.likes - b.likes)
-      console.log(blogsorted)
+      console.log('hahaha',blogsorted)
       setBlogs( blogsorted )
     }
     )
@@ -37,19 +37,13 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
-      console.log(user.name)
-      console.log('i got the username')
       window.localStorage.setItem('loggedBlogAppUser',JSON.stringify(user))
-      useID = user.id
-      console.log('i got the name')
       //setting user token here
       blogService.setToken(user.token)
-      console.log('i set the username')
       setUser(user)
       setUsername('')
       setPassword('')
-      console.log(user.name)
-      console.log(user)
+      console.log('lalala',user.id)
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
@@ -77,7 +71,7 @@ const App = () => {
   const blogListDiv = () => (
     <div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} useId = {useID} />
+        <Blog key={blog.id} blog={blog} useID = {user.id} />
       )}
     </div>
   )
@@ -126,6 +120,7 @@ const App = () => {
             <Togglable buttonLabel = 'Add blog'>
               <UserSubmitForm createBlog = {handleUserFormSubmission} userId = {user.id}/>
             </Togglable>
+            {console.log('chihihi',user.id)}
             {blogListDiv()}
           </div>
         </>

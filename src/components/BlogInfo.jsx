@@ -1,15 +1,7 @@
 import blogService from '../services/blogs'
-import { useState } from 'react'
-const BlogInfo =({ blog,addedBy,id,useID }) => {
-  const [likes, setLikes] = useState(blog.likes)
-  const likesUpdater = async() => {
-    blog.likes += 1
-    const response = await blogService.update(blog,blog.id)
-    console.log(response)
-    console.log('click')
-    setLikes(response.likes)
-    // window.location.reload()
-  }
+const BlogInfo =({ blog,addedBy,id,useID,likesUpdater }) => {
+  console.log('mimimimimi',useID)
+  console.log('lulululu',id.id)
   const removeItem = async () => {
     let confirm = window.prompt(`are you sure you want to delete ${blog.title} by ${blog.author} type yes to confirm`)
     if(confirm.toLocaleLowerCase() === 'yes'){
@@ -22,25 +14,18 @@ const BlogInfo =({ blog,addedBy,id,useID }) => {
       window.alert('invalid input try again')
     }
   }
-  if(id===useID){
-    return (
-      <div>
-        <br/>
-        {blog.url}<br/>
-        {likes} <button onClick={likesUpdater}>like</button><br/>
-        {addedBy}<br/>
-        <button className = "deletion" onClick={removeItem}>delete</button>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <br/>
-        {blog.url}<br/>
-        {likes} <button onClick={likesUpdater}>like</button><br/>
-        {addedBy}<br/>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <br/>
+      {blog.url}<br/>
+      {blog.likes} <button onClick={likesUpdater} className='likeButton'>like</button><br/>
+      {addedBy}<br/>
+      {
+        useID === id.id ?
+          <button className = "deletion" onClick={removeItem}>delete</button> :
+          null
+      }
+    </div>
+  )
 }
 export default BlogInfo

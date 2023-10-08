@@ -10,9 +10,9 @@ describe('<Blog/>', () => {
     author: 'me',
     url: 'lolol.com',
     likes: 100,
-    user: '6512ae33d29f3dc8dc0e5c40',
+    user: '123',
   }
-  const useID = 123
+  const useID = '123'
   let container
   beforeEach(() => {
     container = render(
@@ -24,7 +24,6 @@ describe('<Blog/>', () => {
     expect(div).toHaveTextContent('testing a blog')
     expect(div).toHaveTextContent('me')
     const doesRenderUrl = screen.queryByText('lolol.com')
-    screen.debug(doesRenderUrl)
     expect(doesRenderUrl).toBeNull()
     const doesRenderLikes = screen.queryByText('0')
     expect(doesRenderLikes).toBeNull()
@@ -38,7 +37,6 @@ describe('<Blog/>', () => {
     expect(findLikes).toBeNull()
     const button = screen.getByText('view')
     await user.click(button)
-    screen.debug(div)
     expect(findUrl).toBeDefined()
     expect(findLikes).toBeDefined()
   })
