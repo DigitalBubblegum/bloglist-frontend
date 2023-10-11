@@ -43,18 +43,18 @@ const UserSubmitForm = ({ createBlog, userId }) => {
     <div>
       <form onSubmit={handleUserFormSubmission} className='userForm'>
         <label>Title</label>
-        <input type = "text" value = {title} name="Title" onChange={handleTitle} placeholder='enter title here'></input>
+        <input type = "text" value = {title} name="Title" onChange={handleTitle} placeholder='enter title here' id = 'blogTitle'></input>
         <br/>
         <label>Author</label>
-        <input type = "text" value = {author} name="Author" onChange={handleAuthor} placeholder='enter author here'></input>
+        <input type = "text" value = {author} name="Author" onChange={handleAuthor} placeholder='enter author here' id = 'blogAuthor'></input>
         <br/>
         <label>url</label>
-        <input type = "text" value = {url} name="URL"onChange={handleUrl} placeholder='enter url here'></input>
+        <input type = "text" value = {url} name="URL"onChange={handleUrl} placeholder='enter url here' id = 'blogUrl'></input>
         <br/>
         <label>likes</label>
-        <input type = "text" value ={likes} name="Likes" onChange={handleLikes} placeholder='enter likes here'></input>
+        <input type = "text" value ={likes} name="Likes" onChange={handleLikes} placeholder='enter likes here' id = 'blogLikes'></input>
         <br/>
-        <button type="submit">save</button>
+        <button type="submit" id = 'saveBlog'>save</button>
       </form>
     </div>
   )
