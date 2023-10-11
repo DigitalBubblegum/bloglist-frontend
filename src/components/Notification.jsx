@@ -16,9 +16,5 @@ const Notification = ({ errorMessage, notificationMessage  }) => {
   else{
     return null
   }
-
-
-
-
 }
 export default Notification
