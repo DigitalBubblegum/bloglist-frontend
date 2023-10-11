@@ -86,6 +86,7 @@ describe('Test if user can delete the blog of another user', function () {
     cy.contains('Cypress is creating a new blog')
     cy.contains('Me')
     cy.contains('view').click()
+    //5.22
     cy.contains('delete').should('not.exist')
     cy.contains('LogOut').click()
     cy.get('#username').type('testingCypress', { force: true })
