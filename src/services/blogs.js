@@ -10,7 +10,7 @@ const setToken = (newToken) => {
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request.then(response => response.data.slice().sort((a, b) => b.likes - a.likes))
 }
 
 const create = async blogObject => {

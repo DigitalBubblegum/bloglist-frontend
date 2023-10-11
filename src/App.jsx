@@ -16,9 +16,9 @@ const App = () => {
   //effects
   useEffect(() => {
     blogService.getAll().then(blogs => {
-      let blogsorted = blogs.slice().sort((a, b) => a.likes - b.likes)
-      console.log('hahaha',blogsorted)
-      setBlogs( blogsorted )
+      // let blogsorted = blogs.slice().sort((a, b) => b.likes - a.likes)
+      // console.log('hahaha',blogsorted)
+      setBlogs( blogs )
     }
     )
   },[])
@@ -66,12 +66,13 @@ const App = () => {
     const returnedBlog = await blogService.create(blogObject)
     console.log(returnedBlog)
     returnedBlog.user = user
-    setBlogs(blogs.concat(returnedBlog))
+    // setBlogs(blogs.concat(returnedBlog))
+    blogService.getAll().then(blogs => {setBlogs( blogs )})
   }
   const blogListDiv = () => (
     <div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} useID = {user.id} />
+        <Blog className='blog' key={blog.id} blog={blog} useID = {user.id} />
       )}
     </div>
   )
