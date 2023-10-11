@@ -33,8 +33,7 @@ describe('Blog app', function() {
       cy.contains('login').click()
       cy.contains('cypress has logged in')
     })
-
-    it('A blog can be created', function() {
+    it('A blog can be created and liked', function() {
       cy.contains('LogOut')
       cy.contains('Add blog')
       cy.contains('Add blog').click()
@@ -46,6 +45,9 @@ describe('Blog app', function() {
       cy.get('.notification').contains('Cypress is creating a new blog by author Me added to the blog')
       cy.contains('Cypress is creating a new blog')
       cy.contains('Me')
+      cy.contains('view').click()
+      cy.get('.likeButton').click().wait(1000)
+      cy.contains('141')
     })
   })
 })
